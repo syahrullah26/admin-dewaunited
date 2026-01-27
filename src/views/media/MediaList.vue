@@ -78,7 +78,7 @@ const loadData = async () => {
 }
 
 const getMediaUrl = (path: string) => {
-  return `http://localhost:8000/storage/${path}`
+  return `https://backend-dewaunited-production.up.railway.app/storage/${path}`
 }
 const copyToClipboard = async (text: string) => {
   try {
@@ -211,7 +211,7 @@ onMounted(loadData)
             <p
               class="text-white font-semibold text-sm mt-2 truncate cursor-pointer hover:text-yellow-400"
               :title="media.file_path"
-              @click="copyToClipboard('http://localhost:8000/storage/' + media.file_path)"
+              @click="copyToClipboard('https://backend-dewaunited-production.up.railway.app/storage/' + media.file_path)"
             >
               {{ media.file_name }}
             </p>

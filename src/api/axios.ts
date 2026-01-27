@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { InternalAxiosRequestConfig } from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api/v2',
+  baseURL: 'https://backend-dewaunited-production.up.railway.app/api/v2',
   headers: {
     Accept: 'application/json',
   },
