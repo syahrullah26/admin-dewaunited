@@ -17,7 +17,6 @@ import LoginView from '@/views/auth/Login.vue'
 import LookbookForm from '@/views/lookbook/LookbookForm.vue'
 import LookbookList from '@/views/lookbook/LookbookList.vue'
 
-// Store
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
