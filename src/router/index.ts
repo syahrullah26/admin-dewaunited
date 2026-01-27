@@ -21,7 +21,8 @@ import LookbookList from '@/views/lookbook/LookbookList.vue'
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
+
   routes: [
     {
       path: '/login',
@@ -48,70 +49,84 @@ const router = createRouter({
           name: 'dashboard',
           component: Dashboard,
         },
+
         {
           path: 'teams',
           name: 'teams',
           component: TeamList,
         },
+
         {
           path: 'matches',
           name: 'matches',
           component: MatchList,
         },
+
         {
           path: 'matches/:id',
           name: 'match-details',
           component: () => import('@/views/matches/MatchDetails.vue'),
         },
+
         {
           path: 'players',
           name: 'players',
           component: PlayerList,
         },
+
         {
           path: 'products',
           name: 'products',
           component: ProductList,
         },
+
         {
           path: 'products/create',
           name: 'products-create',
           component: ProductForm,
         },
+
         {
           path: 'products/:id/edit',
           name: 'products-edit',
           component: ProductForm,
         },
+
         {
           path: 'media',
           name: 'media',
           component: MediaList,
         },
+
         {
           path: 'category',
           name: 'category',
           component: CategoryList,
         },
+
         {
-          path: '/lookbooks',
+          path: 'lookbooks',
           name: 'lookbooks',
           component: LookbookList,
-          meta: { requiresAuth: true }
         },
+
         {
-          path: '/lookbooks/create',
+          path: 'lookbooks/create',
           name: 'lookbooks-create',
           component: LookbookForm,
-          meta: { requiresAuth: true }
         },
+
         {
-          path: '/lookbooks/edit/:id',
+          path: 'lookbooks/edit/:id',
           name: 'lookbooks-edit',
           component: LookbookForm,
-          meta: { requiresAuth: true }
-        }
+        },
       ],
+    },
+
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
     },
   ],
 })
@@ -122,11 +137,9 @@ router.beforeEach((to, _, next) => {
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
     return next({ name: 'login' })
   }
-
-  if (to.meta.requiresAuth && !auth.isAdmin) {
+  if (to.meta.requiresAdmin && !auth.isAdmin) {
     return next({ name: 'login' })
   }
-
   if (to.meta.guest && auth.isAuthenticated) {
     return next({ name: 'dashboard' })
   }
