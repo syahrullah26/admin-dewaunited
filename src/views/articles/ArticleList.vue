@@ -110,7 +110,7 @@ onMounted(() => {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header -->
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">Manage Articles</h1>
+      <h1 class="text-3xl font-bold text-zinc-50">Manage Articles</h1>
       <router-link
         to="/articles/create"
         class="inline-flex items-center px-4 py-2 bg-gold hover:bg-goldDark text-white font-medium rounded-lg transition-colors"
@@ -127,13 +127,13 @@ onMounted(() => {
         type="text"
         placeholder="Search articles..."
         @input="debounceSearch"
-        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
       />
 
       <select
         v-model="filters.status"
         @change="fetchArticles"
-        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
       >
         <option value="">All Status</option>
         <option value="draft">Draft</option>
@@ -144,7 +144,7 @@ onMounted(() => {
       <select
         v-model="filters.sort_by"
         @change="fetchArticles"
-        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
       >
         <option value="created_at">Created Date</option>
         <option value="title">Title</option>
@@ -155,7 +155,7 @@ onMounted(() => {
       <select
         v-model="filters.sort_order"
         @change="fetchArticles"
-        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
       >
         <option value="desc">Descending</option>
         <option value="asc">Ascending</option>
