@@ -16,6 +16,9 @@ import CategoryList from '@/views/kategori/CategoryList.vue'
 import LoginView from '@/views/auth/Login.vue'
 import LookbookForm from '@/views/lookbook/LookbookForm.vue'
 import LookbookList from '@/views/lookbook/LookbookList.vue'
+import ArticleList from '@/views/articles/ArticleList.vue'
+import ArticleCreate from '@/views/articles/ArticleCreate.vue'
+import ArticleEdit from '@/views/articles/ArticleEdit.vue'
 
 import { useAuthStore } from '@/stores/auth'
 import ActivationList from '@/views/activations/ActivationList.vue'
@@ -125,6 +128,24 @@ const router = createRouter({
           path: 'activations',
           name: 'activations',
           component: ActivationList,
+        },
+        {
+          path: '/articles',
+          name: 'ArticleList',
+          component: ArticleList,
+          meta: { requiresAuth: true}
+        },
+        {
+          path: '/articles/create',
+          name: 'ArticleCreate',
+          component: ArticleCreate,
+          meta: { requiresAuth: true}
+        },
+        {
+          path: '/articles/:id/edit',
+          name: 'ArticleEdit',
+          component: ArticleEdit,
+          meta: { requiresAuth: true}
         },
       ],
     },
