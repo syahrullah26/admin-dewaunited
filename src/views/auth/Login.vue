@@ -37,6 +37,9 @@ const submitLogin = async () => {
     loading.value = false
   }
 }
+onMounted(() => {
+  AOS.init({ duration: 1000, once: true })
+})
 </script>
 
 <template>

@@ -18,6 +18,7 @@ import LookbookForm from '@/views/lookbook/LookbookForm.vue'
 import LookbookList from '@/views/lookbook/LookbookList.vue'
 
 import { useAuthStore } from '@/stores/auth'
+import ActivationList from '@/views/activations/ActivationList.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -119,6 +120,11 @@ const router = createRouter({
           path: 'lookbooks/edit/:id',
           name: 'lookbooks-edit',
           component: LookbookForm,
+        },
+        {
+          path: 'activations',
+          name: 'activations',
+          component: ActivationList,
         },
       ],
     },
