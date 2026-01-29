@@ -1,5 +1,3 @@
-
-
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { articleApi } from '@/api/article.api'
@@ -11,7 +9,7 @@ const articles = ref<PaginatedResponse<Article>>({
   data: [],
   current_page: 1,
   last_page: 1,
-  per_page: 15,
+  per_page: 10,
   total: 0,
   prev_page_url: null,
   next_page_url: null
@@ -186,8 +184,8 @@ onMounted(() => {
               <th class="px-6 py-3 text-left text-xs font-medium text-zinc-50 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="article in articles.data" :key="article.id" class="hover:bg-gray-50">
+          <tbody class="bg-zinc-900 divide-y divide-gray-200">
+            <tr v-for="article in articles.data" :key="article.id" class="hover:bg-zinc-800">
               <td class="px-6 py-4 whitespace-nowrap">
                 <img
                   v-if="article.banner_image"
@@ -201,7 +199,7 @@ onMounted(() => {
               </td>
               <td class="px-6 py-4">
                 <div class="flex flex-col">
-                  <span class="text-sm font-medium text-gray-900">{{ article.title }}</span>
+                  <span class="text-sm font-medium text-zinc-50">{{ article.title }}</span>
                   <span class="text-xs text-zinc-50">{{ article.slug }}</span>
                 </div>
               </td>
@@ -211,14 +209,14 @@ onMounted(() => {
                     'inline-flex px-3 py-1 text-xs font-semibold rounded-full',
                     article.status === 'draft' && 'bg-yellow-100 text-yellow-800',
                     article.status === 'published' && 'bg-green-100 text-green-800',
-                    article.status === 'archived' && 'bg-gray-100 text-gray-800'
+                    article.status === 'archived' && 'bg-red-100 text-red-800'
                   ]"
                 >
                   {{ article.status }}
                 </span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ article.view_count }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-50">{{ article.view_count }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-50">
                 <span v-if="article.published_at">{{ formatDate(article.published_at) }}</span>
                 <span v-else class="text-gray-400">-</span>
               </td>
@@ -226,7 +224,7 @@ onMounted(() => {
                 <div class="flex space-x-2">
                   <router-link
                     :to="`/articles/${article.id}/edit`"
-                    class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                    class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
                   >
                     Edit
                   </router-link>
@@ -260,15 +258,15 @@ onMounted(() => {
       <button
         @click="changePage(articles.current_page - 1)"
         :disabled="!articles.prev_page_url"
-        class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        class="px-4 py-2 bg-gold rounded-lg hover:bg-goldDark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         Previous
       </button>
-      <span class="text-sm text-gray-700">Page {{ articles.current_page }} of {{ articles.last_page }}</span>
+      <span class="text-sm text-zinc-50">Page {{ articles.current_page }} of {{ articles.last_page }}</span>
       <button
         @click="changePage(articles.current_page + 1)"
         :disabled="!articles.next_page_url"
-        class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        class="px-4 py-2 bg-gold rounded-lg hover:bg-goldDark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         Next
       </button>
