@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { ArticleFormData, ValidationErrors } from '@/types/article'
+import QuillEditor from '@/components/QuillEditor.vue'
 
 interface Props {
   initialData?: Partial<ArticleFormData>
@@ -199,15 +200,7 @@ const handleSubmit = () => {
       <label for="content" class="block text-sm font-semibold text-zinc-50 mb-2">
         Content <span class="text-red-600">*</span>
       </label>
-      <textarea
-        id="content"
-        v-model="formData.content"
-        rows="15"
-        placeholder="Tulis full konten disini..."
-        required
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none resize-y"
-      ></textarea>
-      <small class="block mt-1 text-xs text-zinc-50">Supports HTML formatting</small>
+      <QuillEditor v-model="formData.content" />
       <span v-if="errors.content" class="block mt-1 text-sm text-red-600">{{ errors.content[0] }}</span>
     </div>
 
