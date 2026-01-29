@@ -25,7 +25,7 @@ const menus = [
   { name: 'Manage Matches', to: '/matches', icon: '⚽' },
   { name: 'Manage Player', to: '/players', icon: '👤' },
   { name: 'Manage Activations', to: '/activations', icon: '✅' },
-    { name: 'Manage Articles', to: '/articles', icon: 'aheng' },
+    { name: 'Manage Articles', to: '/articles', icon: '📝' },
   {
     name: 'Store Management',
     icon: '📦',
