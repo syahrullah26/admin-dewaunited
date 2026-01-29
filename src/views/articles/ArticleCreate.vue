@@ -41,7 +41,7 @@ const goBack = () => {
       <h1 class="text-3xl font-bold text-zinc-50">Create New Article</h1>
       <router-link
         to="/articles"
-        class="px-4 py-2 bg-gold hover:bg-goldDark text-zinc-50 font-medium rounded-lg transition-colors"
+        class="px-4 py-2 border border-red-500 bg-zinc-800 hover:bg-red-500 text-red-500 hover:text-zinc-50 font-medium rounded-lg transition-colors"
       >
         Back to List
       </router-link>

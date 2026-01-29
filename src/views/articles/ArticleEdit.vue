@@ -80,33 +80,33 @@ onMounted(() => {
 <template>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">Edit Article</h1>
+      <h1 class="text-3xl font-bold text-zinc-50">Edit Article</h1>
       <router-link
         to="/articles"
-        class="px-4 py-2 bg-gold hover:bg-goldDark text-gray-800 font-medium rounded-lg transition-colors"
+        class="px-4 py-2 border border-red-500 bg-zinc-800 hover:bg-red-500 text-red-500 hover:text-zinc-50 font-medium rounded-lg transition-colors"
       >
          Back to List
       </router-link>
     </div>
 
     <!-- Loading State -->
-    <div v-if="loading" class="text-center py-12 bg-white rounded-lg shadow">
-      <p class="text-gray-600">Loading article...</p>
+    <div v-if="loading" class="text-center py-12 bg-zinc-900 rounded-lg shadow">
+      <p class="text-zinc-50">Loading article...</p>
     </div>
 
     <!-- Error State -->
-    <div v-else-if="loadError" class="text-center py-12 bg-white rounded-lg shadow">
+    <div v-else-if="loadError" class="text-center py-12 bg-zinc-900 rounded-lg shadow">
       <p class="text-red-600 mb-4">{{ loadError }}</p>
       <router-link
         to="/articles"
-        class="inline-block px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+        class="inline-block px-4 py-2 border border-red-500 bg-zinc-800 hover:bg-red-500 text-red-500 hover:text-zinc-50 font-medium rounded-lg transition-colors"
       >
         Back to List
       </router-link>
     </div>
 
     <!-- Form -->
-    <div v-else class="bg-white rounded-lg shadow p-6">
+    <div v-else class="bg-zinc-900 rounded-lg shadow p-6">
       <ArticleForm
         :initial-data="article"
         :is-edit="true"
