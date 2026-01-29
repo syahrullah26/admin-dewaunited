@@ -173,7 +173,7 @@ onMounted(() => {
     </div>
 
     <!-- Articles Table -->
-    <div v-else class="bg-zinc-900 rounded-lg shadow overflow-hidden">
+    <div v-else class="border border-gray-200 bg-zinc-900 rounded-lg shadow overflow-hidden">
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-zinc-900">
