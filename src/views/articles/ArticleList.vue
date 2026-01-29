@@ -176,7 +176,7 @@ onMounted(() => {
     <div v-else class="bg-zinc-900 rounded-lg shadow overflow-hidden">
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+          <thead class="bg-zinc-900">
             <tr>
               <th class="px-6 py-3 text-left text-xs font-medium text-zinc-50 uppercase tracking-wider">Banner</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-zinc-50 uppercase tracking-wider">Title</th>
