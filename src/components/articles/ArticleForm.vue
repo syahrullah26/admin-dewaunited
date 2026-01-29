@@ -135,13 +135,13 @@ const handleSubmit = () => {
     <!-- Excerpt -->
     <div class="mb-6">
       <label for="excerpt" class="block text-sm font-semibold text-zinc-50 mb-2">
-        Excerpt (Summary)
+        Excerpt (Kutipan)
       </label>
       <textarea
         id="excerpt"
         v-model="formData.excerpt"
         rows="3"
-        placeholder="summary pendek (150-300 karakter)"
+        placeholder="Kutipan (150-300 karakter)"
         maxlength="500"
         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none resize-y"
       ></textarea>
