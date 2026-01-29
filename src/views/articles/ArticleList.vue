@@ -164,7 +164,7 @@ onMounted(() => {
 
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-12 bg-zinc-900 rounded-lg shadow">
-      <p class="text-gray-600">Loading articles...</p>
+      <p class="text-zinc-50">Loading articles...</p>
     </div>
 
     <!-- Error State -->
@@ -173,7 +173,7 @@ onMounted(() => {
     </div>
 
     <!-- Articles Table -->
-    <div v-else class="bg-white rounded-lg shadow overflow-hidden">
+    <div v-else class="bg-zinc-900 rounded-lg shadow overflow-hidden">
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -244,10 +244,10 @@ onMounted(() => {
 
         <!-- Empty State -->
         <div v-if="articles.data && articles.data.length === 0" class="text-center py-12">
-          <p class="text-gray-600 mb-4">No articles found.</p>
+          <p class="text-zinc-50 mb-4">No articles found.</p>
           <router-link
             to="/articles/create"
-            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+            class="inline-flex items-center px-4 py-2 bg-gold hover:bg-goldDark text-white font-medium rounded-lg transition-colors"
           >
             Create Your First Article
           </router-link>
