@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { ArticleFormData, ValidationErrors } from '@/types/article'
@@ -42,6 +41,37 @@ const keywordsInput = ref(
   props.initialData.meta_keywords ? props.initialData.meta_keywords.join(', ') : ''
 )
 
+const slugManuallyEdited = ref(false)
+
+const stringToSlug = (str: string): string => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') 
+    .replace(/[\s_-]+/g, '-')  
+    .replace(/^-+|-+$/g, '')  
+}
+
+ 
+const onTitleChange = () => {
+  if (!slugManuallyEdited.value && !props.isEdit) {
+    formData.value.slug = stringToSlug(formData.value.title)
+  }
+}
+
+ 
+const regenerateSlug = () => {
+  formData.value.slug = stringToSlug(formData.value.title)
+  slugManuallyEdited.value = false
+}
+
+ 
+watch(() => formData.value.slug, (newSlug, oldSlug) => {
+  if (oldSlug !== undefined && newSlug !== stringToSlug(formData.value.title)) {
+    slugManuallyEdited.value = true
+  }
+})
+
 watch(() => props.initialData, (newData) => {
   if (newData && Object.keys(newData).length > 0) {
     formData.value = {
@@ -78,6 +108,7 @@ const handleSubmit = () => {
   emit('submit', formData.value)
 }
 </script>
+
 <template>
   <form @submit.prevent="handleSubmit" class="max-w-4xl">
     <!-- Title -->
@@ -91,6 +122,7 @@ const handleSubmit = () => {
         type="text"
         placeholder="Enter article title"
         required
+        @input="onTitleChange"
         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
       />
       <span v-if="errors.title" class="block mt-1 text-sm text-red-600">{{ errors.title[0] }}</span>
@@ -101,14 +133,27 @@ const handleSubmit = () => {
       <label for="slug" class="block text-sm font-semibold text-zinc-50 mb-2">
         Slug
       </label>
-      <input
-        id="slug"
-        v-model="formData.slug"
-        type="text"
-        placeholder="article-slug"
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
-      />
-      <small class="block mt-1 text-xs text-zinc-50">biarin kosong aja, nanti otomatis input</small>
+      <div class="relative">
+        <input
+          id="slug"
+          v-model="formData.slug"
+          type="text"
+          placeholder="article-slug"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
+          :class="{'bg-gray-50': !slugManuallyEdited && !props.isEdit}"
+        />
+        <button
+          v-if="formData.title && !props.isEdit"
+          type="button"
+          @click="regenerateSlug"
+          class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 text-xs bg-gold text-white hover:bg-goldDark rounded transition-colors"
+        >
+          Regenerate
+        </button>
+      </div>
+      <small class="block mt-1 text-xs text-zinc-50">
+        {{ slugManuallyEdited ? 'Custom slug (manually edited)' : 'Biarin kosong aja, nanti otomatis input dari title' }}
+      </small>
       <span v-if="errors.slug" class="block mt-1 text-sm text-red-600">{{ errors.slug[0] }}</span>
     </div>
 
@@ -135,16 +180,17 @@ const handleSubmit = () => {
     <!-- Excerpt -->
     <div class="mb-6">
       <label for="excerpt" class="block text-sm font-semibold text-zinc-50 mb-2">
-        Excerpt (Kutipan)
+        Excerpt (Summary)
       </label>
       <textarea
         id="excerpt"
         v-model="formData.excerpt"
         rows="3"
-        placeholder="Kutipan (150-300 karakter)"
+        placeholder="summary pendek (150-300 karakter)"
         maxlength="500"
         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none resize-y"
       ></textarea>
+      <small class="block mt-1 text-xs text-zinc-50">{{ formData.excerpt?.length || 0 }} / 500 karakter</small>
       <span v-if="errors.excerpt" class="block mt-1 text-sm text-red-600">{{ errors.excerpt[0] }}</span>
     </div>
 
@@ -161,6 +207,7 @@ const handleSubmit = () => {
         required
         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none resize-y"
       ></textarea>
+      <small class="block mt-1 text-xs text-zinc-50">Supports HTML formatting</small>
       <span v-if="errors.content" class="block mt-1 text-sm text-red-600">{{ errors.content[0] }}</span>
     </div>
 
@@ -193,7 +240,7 @@ const handleSubmit = () => {
           type="datetime-local"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
         />
-        <small class="block mt-1 text-xs text-zinc-50">biarin kosong aja, nanti otomatis input</small>
+        <small class="block mt-1 text-xs text-zinc-50">Biarin kosong aja, nanti otomatis input</small>
         <span v-if="errors.published_at" class="block mt-1 text-sm text-red-600">{{ errors.published_at[0] }}</span>
       </div>
     </div>
@@ -234,7 +281,7 @@ const handleSubmit = () => {
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none resize-y"
         ></textarea>
         <small class="block mt-1 text-xs text-zinc-50">
-          {{ formData.meta_description?.length || 0 }} / 160 karakter (rrekomendasi)
+          {{ formData.meta_description?.length || 0 }} / 160 karakter (rekomendasi)
         </small>
       </div>
 
@@ -258,10 +305,10 @@ const handleSubmit = () => {
           <span
             v-for="(keyword, index) in formData.meta_keywords"
             :key="index"
-            class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm"
+            class="inline-flex items-center gap-2 px-3 py-1 bg-gold text-zinc-50 rounded-full text-sm"
           >
             {{ keyword }}
-            <button type="button" @click="removeKeyword(index)" class="text-indigo-700 hover:text-indigo-900 text-lg leading-none">
+            <button type="button" @click="removeKeyword(index)" class="text-zinc-50 hover:text-zinc-200 text-lg leading-none">
               ×
             </button>
           </span>
