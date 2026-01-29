@@ -140,7 +140,7 @@ const handleSubmit = () => {
           type="text"
           placeholder="article-slug"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-goldDark outline-none"
-          :class="{'bg-gray-50': !slugManuallyEdited && !props.isEdit}"
+          :class="{'bg-zinc-900': !slugManuallyEdited && !props.isEdit}"
         />
         <button
           v-if="formData.title && !props.isEdit"
