@@ -80,11 +80,16 @@ export interface Product {
 
   related_products: RelatedProduct[]
 
+  external_links?: {
+    shopee?: string
+    tokopedia?: string
+    tiktok_shop?: string
+  }
+
   is_active: boolean
   created_at?: string
   updated_at?: string
 }
-
 
 export interface ProductResponse {
   data: Product;

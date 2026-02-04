@@ -46,6 +46,11 @@ const form = ref({
   detail_images: [] as DetailImage[],
   lifestyle_images: [] as string[],
   related_products: [] as number[],
+  external_links: {
+    shopee: '',
+    tokopedia: '',
+    tiktok_shop: '',
+  },
   is_active: true,
 });
 
@@ -86,6 +91,13 @@ const fetchProduct = async () => {
       detail_images: product.detail_images || [],
       lifestyle_images: product.lifestyle_images || [],
       related_products: product.related_products?.map(p => p.id) || [],
+
+      external_links: {
+        shopee: product.external_links?.shopee || '',
+        tokopedia: product.external_links?.tokopedia || '',
+        tiktok_shop: product.external_links?.tiktok_shop || '',
+      },
+
       is_active: product.is_active,
     };
 
@@ -705,6 +717,47 @@ onMounted(() => {
             />
             <span class="text-sm font-medium text-white">Active (visible to customers)</span>
           </label>
+        </div>
+      </div>
+
+      <!-- link marketplace extern -->
+      <div class="bg-zinc-900 rounded-lg shadow-sm border border-gray-200 p-6 space-y-4">
+        <h2 class="text-xl font-medium text-white">Marketplace Links</h2>
+
+        <div>
+          <label class="block text-sm font-medium text-white mb-2">
+            Shopee Link
+          </label>
+          <input
+            v-model="form.external_links.shopee"
+            type="url"
+            placeholder="https://shopee.co.id/..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-white mb-2">
+            Tokopedia Link
+          </label>
+          <input
+            v-model="form.external_links.tokopedia"
+            type="url"
+            placeholder="https://tokopedia.com/..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-white mb-2">
+            TikTok Shop Link
+          </label>
+          <input
+            v-model="form.external_links.tiktok_shop"
+            type="url"
+            placeholder="https://www.tiktok.com/..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          />
         </div>
       </div>
 
